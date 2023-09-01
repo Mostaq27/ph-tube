@@ -21,11 +21,10 @@ const handleLoadData = async (categoryId) => {
 
     data.data?.forEach((info) => {
        
-        const durationInSeconds = info?.others.posted_date;
+        const durationInSeconds = info.others?.posted_date;
         const hours = Math.floor(durationInSeconds / 3600);
         const minutes = Math.floor((durationInSeconds % 3600) / 60);
-        // return duration = hours,minutes;
-        // console.log(` ${hours}Hrs${minutes}Min ago`);
+        
 
 
         const div = document.createElement('div');
