@@ -28,7 +28,7 @@ Data.length===0{
         const response = await fetch(`https://openapi.programming-hero.com/api/videos/category/${categoryId}`);
         const data = await response.json();
         console.log(data.data);
-        if (data?.length ===0) {
+        if (data.dat.length ===0) {
     
             console.log('there is nothing');
             const cardContainer1 = document.getElementById("card-container");
