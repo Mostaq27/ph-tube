@@ -2,7 +2,7 @@ const dataLoader = async () => {
     const response = await fetch("https://openapi.programming-hero.com/api/videos/categories")
     const data = await response.json()
     const categories = data.data;
-
+      
     const cardContainer = document.getElementById("card-container");
     categories.forEach(category => {
         const div = document.createElement("div")
@@ -15,17 +15,17 @@ const dataLoader = async () => {
 const handleLoadData = async (categoryId) => {
     const response = await fetch(`https://openapi.programming-hero.com/api/videos/category/${categoryId}`);
     const data = await response.json();
-
+console.log(data);
     const cardContainer1 = document.getElementById("card-container1");
     cardContainer1.textContent = "";
 
     data.data?.forEach((info) => {
-        console.log(info);
+        
         const div = document.createElement('div');
         div.innerHTML = `
         <div class="card  bg-base-100 shadow-xl ">
   <figure class="h-[150px]"><img src= ${info?.thumbnail}/>
-        <p class="absolute top-[40%] right-[2%] bg-gray-500 text-white">${info.others.posted_date}</p>
+        <p class="absolute top-[40%] right-[6%] bg-gray-500 text-white">${info.others.posted_date}</p>
   </figure>
   <div class="card-body">
     <h2 class="card-title font-bold">${info.title} </h2>
