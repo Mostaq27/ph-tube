@@ -1,3 +1,4 @@
+var sortingId = 0;
 const dataLoader = async () => {
     const response = await fetch("https://openapi.programming-hero.com/api/videos/categories");
     const data = await response.json()
@@ -12,14 +13,18 @@ const dataLoader = async () => {
         cardContainer.appendChild(div);
     });
 };
-const handleLoadData = async (categoryId) => {
+
+const handleLoadData = async (categoryId,sorting) => {
+    sortingId =categoryId;
     const response = await fetch(`https://openapi.programming-hero.com/api/videos/category/${categoryId}`);
     const data = await response.json();
  
-    // const cardContainer1 = document.getElementById("card-container1");
-    // cardContainer1.textContent = "";
+    
+    if(sorting){
+        data.data?.sort((a, b) => parseFloat(b.others.views) - parseFloat(a.others.views));
+    }
 
-    // data.data?.sort((a, b) => b.others.views - a.others.views);
+    
     // console.log(data.data.length);
     if (data?.data.length ==0) {
     
@@ -34,7 +39,7 @@ const handleLoadData = async (categoryId) => {
 
     data.data?.forEach((info) => {
        
-        const durationInSeconds = info?.others.posted_date;
+        const durationInSeconds = info?.others?.posted_date ;
         const hours = Math.floor(durationInSeconds / 3600);
         const minutes = Math.floor((durationInSeconds % 3600) / 60);
         
@@ -44,7 +49,7 @@ const handleLoadData = async (categoryId) => {
         div.innerHTML = `
         <div class="card  bg-base-100 shadow-xl ">
   <figure class="h-[150px]"><img src= ${info?.thumbnail}/>
-        <p class="absolute top-[40%] right-[6%] bg-gray-500 text-white rounded-lg px-2">${` ${hours}hrs ${minutes} min ago`}</p>
+        <p class="absolute top-[40%] right-[6%] bg-gray-500 text-white rounded-lg px-2">${ info?.others?.posted_date ? `${hours} hrs ${minutes} min ago`:""}</p>
   </figure>
   <div class="card-body">
   
@@ -81,5 +86,11 @@ const handleLoadData = async (categoryId) => {
 
 };
 
+
+document.getElementById("sortButton").addEventListener("click",()=>{
+    handleLoadData(sortingId,true)
+})
+
 dataLoader();
 handleLoadData('1000');
+ 
