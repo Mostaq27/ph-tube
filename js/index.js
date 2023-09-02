@@ -8,7 +8,7 @@ const dataLoader = async () => {
     categories.forEach(category => {
         const div = document.createElement("div")
         div.innerHTML = `
-        <button onclick="handleLoadData('${category.category_id}')" class="btn inline-block rounded-lg ">${category.category}</butto>
+        <button onclick="handleLoadData('${category.category_id}')" class="btn inline-block rounded-lg font-bold active:bg-violet-700 focus:bg-[#FF1F3D] focus:text-white">${category.category}</butto>
         `
         cardContainer.appendChild(div);
     });
@@ -25,7 +25,7 @@ const handleLoadData = async (categoryId,sorting) => {
     }
 
     
-    // console.log(data.data.length);
+    
     if (data?.data.length ==0) {
     
          const drawing = document.getElementById('drawing')
